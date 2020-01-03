@@ -1,18 +1,18 @@
 import React from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom';
 import './styles.css';
 
 import Header from './elements/Header';
+import Account from './pages/Account';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div className="container">
-        <h2>Mês Atual</h2>
-        <p>Gráficos</p>
+    <Router>
+      <div>
+        <Header />
+        <Route path='/account' exact component={Account} />
       </div>
-
-    </div>
+    </Router>
   );
 }
 
