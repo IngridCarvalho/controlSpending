@@ -1,11 +1,12 @@
 import React  from 'react';
-import useGet from '../../utils/useGet';
+import Rest from '../../utils/rest';
 
-const url = 'https://control-spending.firebaseio.com/categories.json';
+const baseURL = 'https://control-spending.firebaseio.com/';
+const { useGet } = Rest(baseURL);
 
 const Categories = () => {
 
-    const data = useGet(url);
+    const data = useGet('categories');
    
     if(data.loading){
         return <p>Carregando...</p>

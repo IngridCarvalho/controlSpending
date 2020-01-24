@@ -1,11 +1,12 @@
 import React from 'react';
-import useGet from '../../utils/useGet';
+import Rest from '../../utils/rest';
 
-const url = 'https://control-spending.firebaseio.com/accounts.json';
+const baseURL = 'https://control-spending.firebaseio.com/';
+const { useGet } = Rest(baseURL);
 
 const Accounts = () => {
 
-    const data = useGet(url);
+    const data = useGet('accounts');
    
     if(data.loading){
         return <p>Carregando...</p>

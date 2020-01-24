@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
-import usePost from '../../utils/usePost';
+import Rest from '../../utils/rest';
 
-const url = 'https://control-spending.firebaseio.com/categories.json';
+const baseURL = 'https://control-spending.firebaseio.com/';
+const { usePost } = Rest(baseURL);
 
 const AddCategory = () => {
 
-    const [postData, post] = usePost(url); 
+    const [postData, post] = usePost('categories'); 
     const [description, setDescription] = useState('');
 
     const onChangeDescription = evt => {
         setDescription(evt.target.value);
     }
 
-    const saveCategory = () => {
-        post({description: description});
+    const saveCategory = async() => {
+        await post({description: description});
         setDescription('');
     }
 
