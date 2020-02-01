@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
+    const [logged, setLogged] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token){
+          setLogged(true);
+        }else{
+          setLogged(false);
+        }
+    }, [logged])
+
+    const logout = () => {
+      localStorage.removeItem('token');
+      setLogged(false);
+    }
+
     return (
         <nav className="navbar navbar-expand-lg navbar-light nav-color">
         <div className="container">
@@ -39,6 +55,10 @@ const Header = () => {
             </ul>
           </div>
         </div>
+        {
+          logged &&
+          <button type="button" className="btn btn-dark" onClick={logout}>Sair</button>
+        }
       </nav>
     )
 }

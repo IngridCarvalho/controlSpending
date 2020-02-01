@@ -7,6 +7,7 @@ import Account from './pages/Account';
 import Category from './pages/Category';
 import Expense from './pages/Expense';
 import Revenue from './pages/Revenue';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/category' exact component={Category} />
         <Route path='/expense' exact component={Expense} />
         <Route path='/revenue' exact component={Revenue} />
+        <Route path='/login' exact component={Login} />
       </div>
     </Router>
   );
