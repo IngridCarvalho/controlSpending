@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 const Header = () => {
     const [logged, setLogged] = useState(false);
@@ -16,7 +16,12 @@ const Header = () => {
     const logout = () => {
       localStorage.removeItem('token');
       setLogged(false);
+      window.location.reload();
     }
+
+    // if(!logged){
+    //     return <Redirect to='/login' />
+    // }
 
     return (
         <nav className="navbar navbar-expand-lg navbar-light nav-color">
@@ -58,6 +63,10 @@ const Header = () => {
         {
           logged &&
           <button type="button" className="btn btn-dark" onClick={logout}>Sair</button>
+        }
+        {
+          !logged &&
+          <Redirect to='/login' />
         }
       </nav>
     )

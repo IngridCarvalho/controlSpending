@@ -7,17 +7,35 @@ const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPasswo
 const Login = () => {
     const [postData, signin] = usePost(url);
     const [logged, setLogged] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassaword] = useState('');
+
+    const onChangeEmail = evt => {
+        setEmail(evt.target.value);
+    }
+
+    const onChangePassword = evt => {
+        setPassaword(evt.target.value);
+    }
 
     useEffect(() => {
         if(Object.keys(postData.data).length > 0){
             localStorage.setItem('token', postData.data.idToken);
-            setLogged(true);
+            window.location.reload();
         }
     }, [postData]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if(token){
+            setLogged(true);
+        }
+    })
+
     const access = async() => {
         await signin({ //the token will be caught for useEffect, when there is a change in data
-            email: 'ingridcarvalho.1007@gmail.com',
-            password: '123456',
+            email,
+            password,
             returnSecureToken: true
         });
     }
@@ -27,9 +45,19 @@ const Login = () => {
     }
 
     return (
-        <div>
+        <div className="container">
             <h1>Login</h1>
-            <button type="button" onClick={access}>Acessar</button>
+            {
+                postData.error && postData.error.length > 0 && 
+                <p className="alert alert-danger">Email ou senha inválidos!</p>
+            }
+            <div className="form-group col-md-5">
+                <label>Email:</label>
+                <input type="text" className="form-control" value={email} onChange={onChangeEmail}/>
+                <label>Senha:</label>
+                <input type="password" className="form-control" value={password} onChange={onChangePassword}/>
+            </div>
+            <button type="button" className="btn btn-success" onClick={access}>Acessar</button>
         </div>
     )
 
