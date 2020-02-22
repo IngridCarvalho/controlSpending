@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Rest from '../../utils/rest';
 
 const baseURL = 'https://control-spending.firebaseio.com/';
 const { useGet } = Rest(baseURL);
 
-const Accounts = () => {
+const Accounts = ({ updateList }) => {
 
     const data = useGet('accounts');
-   
+
+    useEffect(() => {
+        
+        if(updateList){
+            data.refetch();
+        }
+
+    }, [updateList]);
+
     if(data.loading){
         return <p>Carregando...</p>
     }

@@ -57,8 +57,8 @@ const init = baseURL => {
             ...data,
             refetch: load
         }
-    } 
-
+    }
+    
     const usePost = (resource) => {
         const [data, dispatch] = useReducer(reducer, INITIAL_STATE)
     

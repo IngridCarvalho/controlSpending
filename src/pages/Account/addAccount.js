@@ -4,7 +4,7 @@ import Rest from '../../utils/rest';
 const baseURL = 'https://control-spending.firebaseio.com/';
 const { usePost } = Rest(baseURL);
 
-const AddAccount = () => {
+const AddAccount = ( props ) => {
 
     const [postData, post] = usePost('accounts');
     const [description, setDescription] = useState('');
@@ -25,6 +25,7 @@ const AddAccount = () => {
         });
         setDescription('');
         setBalance(0);
+        props.saveAccount(true);
     }
 
     return (
