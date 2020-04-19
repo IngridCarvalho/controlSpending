@@ -6,6 +6,8 @@ const INITIAL_STATE = {
     data: {}
 }
 
+const baseURL = 'https://control-spending.firebaseio.com/';
+
 const reducer = (state, action) => {
     if(action.type === 'REQUEST'){
         return {
@@ -38,7 +40,7 @@ const getAuth = () => {
     return '';
 }
 
-const init = baseURL => {
+const init = () => {
     const useGet = resource => { //generic function
         const [data, dispatch] = useReducer(reducer, INITIAL_STATE)
 

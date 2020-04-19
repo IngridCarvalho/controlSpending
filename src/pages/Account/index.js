@@ -1,22 +1,22 @@
 import React from 'react';
+import { useState } from 'react';
 
 import Accounts from './Accounts';
 import AddAccount from './addAccount';
-import { useState } from 'react';
 
 const Account = () => {
 
     const [updateList, setUpdateList] = useState(false);
     
-    const saveAccount = (content) => {
-        setUpdateList(content);
+    const newAccount = (value) => {
+        setUpdateList(value);
         setUpdateList(false);
     }
 
     return (
         <div className='container'>
             <h3 className="mt-4 mb-4">Contas</h3>
-            <AddAccount saveAccount={saveAccount}/>
+            <AddAccount saveAccount={newAccount}/>
             <Accounts updateList={updateList}/>
         </div>
     )

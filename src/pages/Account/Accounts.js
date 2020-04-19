@@ -9,7 +9,6 @@ const Accounts = ({ updateList }) => {
     const data = useGet('accounts');
 
     useEffect(() => {
-        
         if(updateList){
             data.refetch();
         }
